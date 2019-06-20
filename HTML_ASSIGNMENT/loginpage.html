@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+
+<head> 
+		<title>LOGIN</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		
+ <script>
+ function validateForm() 
+{
+  var email1= "priyanka@cronj.com";
+  var email2= document.getElementById("email").value;
+  var password2= "cronjit";
+  var password1= document.getElementById("password").value;
+  if(password1==password2 && email1==email2)
+	document.getElementById("result").innerHTML="LOGIN SUCCESSFUL";
+    else
+    document.getElementById("result").innerHTML="Email PASSWORD DOESN'T MATCH";
+}
+</script>
+</head>
+<body>
+		<div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+				<h1>LOGIN</h1>
+					<form class="" >
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Username</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									
+									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your USERNAME"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="password" class="form-control" name="password" id="password"  placeholder="CREATE PASSWORD"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group ">
+							<input type="button" id="button" value="Submit" onClick="validateForm()">
+						</div>
+						<p id="result"> </p>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		
+	
+	
+	</body>
+</html>

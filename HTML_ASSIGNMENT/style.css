@@ -1,0 +1,31 @@
+<Style>
+#playground-container {
+    height: 400px;	
+}
+body, html{
+     height: 100%;
+	background-repeat:repeat;
+ 	background-image:url('img.jpg');
+	 background-size:cover;
+    background-position: center; 
+
+}
+.main{
+ 	margin:85px 50px;
+	opacity:0.4
+	}
+	
+.main-center{
+ 	margin-top: 80px;
+ 	margin: 0 auto;
+ 	max-width: 400px;
+    padding: 10px 40px;
+	background:black;
+	color: #fff;
+    text-shadow: black;
+	}
+	.form-group{
+	margin-bottom: 15px;
+}
+	
+ </style>
