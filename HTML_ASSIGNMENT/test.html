@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+
+<head> 
+		<title>add</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		
+ <script>
+ function addEmp() 
+{
+  
+var empname=document.getElementById("name").value;
+var empemail=document.getElementById("email").value;
+var empage=document.getElementById("age").value;
+var empsal=document.getElementById("salary").value;
+var emprem=document.getElementById("name").value;
+var emps = [];
+var y = window.localStorage.getItem("emps");
+        if (y) {
+            emps = JSON.parse(y);
+        }
+
+emps.push({ "addname": empname,  "addemail": empemail,"addage": empage, "addsalary": empsalary,"addremark": emprem });
+document.getElementById("name").value = "";
+document.getElementById("email").value = "";
+document.getElementById("age").value = "";
+document.getElementById("salary").value = "";
+document.getElementById("name").value = "";
+window.localStorage.setItem("emps", JSON.stringify(emps));
+
+ 
+    }
+</script>
+</head>
+<body>
+		<div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+				<h1>Add Employee</h1>
+					<form class="" >
+						<div class="form-group">
+							<label for="name" class="cols-sm-2 control-label">Name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									
+									<input type="text" class="form-control" name="name" id="name"  placeholder="Employee Name"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="email" class="form-control" name="email" id="email"  placeholder="Employee Email"/>
+								</div>
+							</div>
+                        </div>
+                        <div class="form-group">
+							<label for="age" class="cols-sm-2 control-label">Age</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="age" class="form-control" name="age" id="age"  placeholder="Employee Age"/>
+								</div>
+							</div>
+                        </div>
+                        <div class="form-group">
+							<label for="salary" class="cols-sm-2 control-label">Salary</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="salary" class="form-control" name="salary" id="salary"  placeholder="Employee Salary"/>
+								</div>
+							</div>
+                        </div>
+                        <div class="form-group">
+							<label for="remark" class="cols-sm-2 control-label">Remarks</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="remark" class="form-control" name="remark" id="remark"  placeholder="Remark"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group ">
+							<input type="button" id="button" value="Submit" onClick="addEmp()">
+                        </div>
+                        
+						
+						
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		
+	
+	
+	</body>
+</html>

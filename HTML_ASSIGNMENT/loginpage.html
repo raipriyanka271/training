@@ -8,14 +8,15 @@
  <script>
  function validateForm() 
 {
+	
   var email1= "priyanka@cronj.com";
   var email2= document.getElementById("email").value;
   var password2= "cronjit";
   var password1= document.getElementById("password").value;
   if(password1==password2 && email1==email2)
-	window.location="sales.html"
+	window.location="details.html"
     else
-    document.getElementById("result").innerHTML="Email PASSWORD DOESN'T MATCH";
+    document.getElementById("result").innerHTML="EMAIL PASSWORD DOESN'T MATCH";
 }
 </script>
 </head>
@@ -23,7 +24,7 @@
 		<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-				<h1>LOGIN</h1>
+				<h1>Admin Login</h1>
 					<form class="" >
 						<div class="form-group">
 							<label for="email" class="cols-sm-2 control-label">Username</label>
@@ -39,7 +40,7 @@
 							<label for="password" class="cols-sm-2 control-label">Password</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<input type="password" class="form-control" name="password" id="password"  placeholder="CREATE PASSWORD"/>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="ENTER PASSWORD"/>
 								</div>
 							</div>
 						</div>
