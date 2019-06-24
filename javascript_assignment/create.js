@@ -24,10 +24,21 @@ function addEmp() {
         emps = JSON.parse(y);
     }
     console.log(emps);
+    function ValidateEmail(empmail) 
+    {
+     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(myForm.emailAddr.value))
+      {
+        return (true)
+      }
+        alert("You have entered an invalid email address!")
+        return (false)
+    }
     if (empname == "" || empemail == "" || empage == "" || empsal == "" || emprem == "")
         alert("Field Can Not Be Empty");
     else if (isNaN(empsal) || empsal < 1 || isNaN(empage) || empage < 1)
         alert("ONLY NUMERIC VALUES ALLOWED");
+    else if(ValidateEmail(empmail))
+    alert("Email");
     else
         emps.push({ "addname": empname, "addemail": empemail, "addage": empage, "addsalary": empsal, "addremark": emprem });
     console.log(emps);
