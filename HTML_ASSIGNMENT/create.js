@@ -46,16 +46,8 @@ function addEmp() {
             return (emp.addname === empname);
         }
         );
-        text="<tr>"+"<td>"+result[0].addname+"</td>"
-        +"<td>"+result[0].addemail+"</td>"
-        +"<td>"+result[0].addage+"</td>"
-        +"<td>"+result[0].addsalary+"</td>"
-        +"<td>"+result[0].addremark+"</td>"
-        "</tr>"
 
-        document.getElementById("res2").innerHTML=text;
-        
-       
+        document.write(" Name:" + " " + result[0].addname + " " + " Email: " + result[0].addemail + " Age:" + " " + result[0].addage + " Salary: " + " " + result[0].addsalary + " Remark :" + " " + result[0].addremark);
 
     };
     function searchE() {
@@ -74,7 +66,7 @@ function addEmp() {
 
     };
     function createlist(){
-
+        alert("123");
     var emps = [];
         var y = window.localStorage.getItem("emps");
         if (y) {
@@ -87,12 +79,12 @@ function addEmp() {
         for (var i = 0; i < len; i++) {
             var myObject = arrayObjects[i];
 
-            text+="<tr>"+"<td>"+myObject.addname+"</td>"
-            +"<td>"+myObject.addemail+"</td>"
-            +"<td>"+myObject.addage+"</td>"
-            +"<td>"+myObject.addsalary+"</td>"
-            +"<td>"+myObject.addremark+"</td>"
-            "</tr>"
+            text+="<tr>"+"<td>"+myObject.addname+"<td>"
+            +"<td>"+myObject.addemail+"<td>"
+            +"<td>"+myObject.addage+"<td>"
+            +"<td>"+myObject.addsalary+"<td>"
+            +"<td>"+myObject.addremark+"<td>"
+            "<tr>"
 
         }
 
