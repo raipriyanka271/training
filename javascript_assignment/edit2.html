@@ -2,6 +2,7 @@
     <head>
         <script >
        function searchE(){
+
 			var emps = [];
 			var y = window.localStorage.getItem("emps");
 			if (y) {
@@ -19,6 +20,22 @@
         document.getElementById("salary").value=result[0].addsalary;
         document.getElementById("remark").value=result[0].addremark;
        }
+        function del(){
+        var emps = [];
+        var y = window.localStorage.getItem("emps");
+        if (y) {
+        emps = JSON.parse(y);
+        }
+        var empname = document.getElementById("ser").value;
+        var result = emps.filter(function (emp) {
+        return (emp.addname === empname);
+        }
+        );
+        emps.splice((emps.findIndex(result[0])),1);
+        console.log(emps);
+
+    }
+       
             </script> 
         <link rel="stylesheet" type="text/css" href="style.css">
        
@@ -31,9 +48,15 @@
                                 <h1>Edit Employee</h1>
                                 <form class="">
                                         <form class="example">
+                                                <input type="text" placeholder="Search.." name="search" id="ser">
+                                                <input type="button" id="button" value="Delete" onClick="del()" />
+                                            </form>  
+                                            
+                                        <form class="example">
                                                 <input type="text" placeholder="Search.." name="search" id="search">
-                                                <input type="button" id="button" value="Search" onClick="searchE()" />
+                                                <input type="button" id="button" value="Edit" onClick="searchE()" />
                                             </form>
+                                                                              
                         
                                     <div class="form-group">
                                         <label for="name" class="cols-sm-2 control-label">Name;</label>

@@ -33,6 +33,7 @@ function addEmp() {
     console.log(emps);
 
     window.localStorage.setItem("emps", JSON.stringify(emps));
+    window.location="details.html"
 }
    
     function searchEmp() {
@@ -73,6 +74,7 @@ function addEmp() {
 
 
     };
+    
     function createlist(){
 
     var emps = [];
