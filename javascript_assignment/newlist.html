@@ -6,7 +6,7 @@
         
 		
 	
-function createlist(){
+function createList(){
 
         var emps = [];
             var y = window.localStorage.getItem("emps");
@@ -25,6 +25,7 @@ function createlist(){
                 +"<td>"+myObject.addage+"</td>"
                 +"<td>"+myObject.addsalary+"</td>"
                 +"<td>"+myObject.addremark+"</td>"
+                
                 "</tr>"
     
             }
@@ -36,10 +37,13 @@ function createlist(){
         displayArrayObjects(emps);    
     
         }
+        function edit(){
+            console.log("here");
+        }
         
     </script>
 </head>
-<body onload="createlist()" >
+<body onload="createList()" >
         <div class="navbar">
 				<a href="test.html">ADD EMPLOYEE</a>
 				<a href="list.html">DISPLAY</a>
@@ -58,7 +62,7 @@ function createlist(){
             <th>AGE</th>
             <th>SALARY</th>
             <th>REMARK</th>
-            <th>Delete</th>
+            <th>EDIT</th>
             
             
         </tr>

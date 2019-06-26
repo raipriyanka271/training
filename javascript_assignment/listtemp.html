@@ -1,12 +1,9 @@
 <html>
 <head>
    
-       <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
        <script>
-        
-		
-	
-function createlist(){
+           function createlist(){
 
         var emps = [];
             var y = window.localStorage.getItem("emps");
@@ -25,6 +22,7 @@ function createlist(){
                 +"<td>"+myObject.addage+"</td>"
                 +"<td>"+myObject.addsalary+"</td>"
                 +"<td>"+myObject.addremark+"</td>"
+                +"<button onclick="edit()">Edit</button>"
                 "</tr>"
     
             }
@@ -58,8 +56,7 @@ function createlist(){
             <th>AGE</th>
             <th>SALARY</th>
             <th>REMARK</th>
-            <th>Delete</th>
-            
+            <th>EDIT</th>
             
         </tr>
     </thead>

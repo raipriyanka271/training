@@ -17,7 +17,7 @@
   var password1= document.getElementById("password").value;
   console.log(password1);
   if(password1==password2 && email1==email2 || password1==password2 && username==email2){
-	sessionStorage.setItem(email2,password2);
+	sessionStorage.setItem("emailid",password1);
 	
 	window.location="test.html"
 
