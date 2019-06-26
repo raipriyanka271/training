@@ -3,25 +3,33 @@
 <head>
 	<title>LOGIN</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-
+	
 
 	<script>
+		
 	function validateForm() 
 {
 	
   var email1= "priyanka@cronj.com";
   var email2= document.getElementById("email").value;
+  var username="prai";
   var password2= "cronjit";
   var password1= document.getElementById("password").value;
-  if(password1==password2 && email1==email2)
-	window.location="details.html"
+  console.log(password1);
+  if(password1==password2 && email1==email2 || password1==password2 && username==email2){
+	sessionStorage.setItem(email2,password2);
+	
+	window.location="test.html"
+
+  }
     else
     document.getElementById("result").innerHTML="EMAIL PASSWORD DOESN'T MATCH";
 } </script>
 
 </head>
 
-<body>
+<body >
+	
 	<div class="container">
 		<div class="row main">
 			<div class="main-login main-center">
@@ -33,10 +41,13 @@
 							<div class="input-group">
 
 								<input type="text" class="form-control" name="email" id="email"
-									placeholder="Enter your USERNAME" />
+									placeholder="Enter your Username or Email" />
 							</div>
+							
 						</div>
+						
 					</div>
+					
 
 					<div class="form-group">
 						<label for="password" class="cols-sm-2 control-label">Password</label>

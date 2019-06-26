@@ -20,21 +20,34 @@
         document.getElementById("salary").value=result[0].addsalary;
         document.getElementById("remark").value=result[0].addremark;
        }
-        function del(){
-        var emps = [];
+       function myFun(){
+		 var emps = [];
         var y = window.localStorage.getItem("emps");
         if (y) {
         emps = JSON.parse(y);
         }
-        var empname = document.getElementById("ser").value;
+		var empname = document.getElementById("ser").value;
+		 
         var result = emps.filter(function (emp) {
         return (emp.addname === empname);
         }
-        );
-        emps.splice((emps.findIndex(result[0])),1);
-        console.log(emps);
+		);
+		console.log(emps);
+		function res(result){
+			return result[0].addage;
+		}
+		function findWithAttr(emps,field,value){
+			var len = emps.length;
 
-    }
+        for (var i = 0; i < len; i++) {
+			if(emps[i][field]===value)
+			return i;
+		}
+	}   var num=findWithAttr(emps,"addname",result[0].addname);
+         emps.splice(num,1);
+         console.log(emps);
+	}
+    
        
             </script> 
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -42,15 +55,18 @@
     </head>
     <body>
             <body>
+                    <div class="navbar">
+                            <a href="test.html">ADD EMPLOYEE</a>
+                            <a href="list.html">DISPLAY</a>
+                            <a href="edit.html">SEARCH</a>
+                            <a href="edit2.html">EDIT</a>
+            
+                          </div>
+                          
                     <div class="container">
                         <div class="row main">
                             <div class="main-login main-center">
                                 <h1>Edit Employee</h1>
-                                <form class="">
-                                        <form class="example">
-                                                <input type="text" placeholder="Search.." name="search" id="ser">
-                                                <input type="button" id="button" value="Delete" onClick="del()" />
-                                            </form>  
                                             
                                         <form class="example">
                                                 <input type="text" placeholder="Search.." name="search" id="search">

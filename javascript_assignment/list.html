@@ -1,35 +1,56 @@
 <html>
 <head>
-    <style>
-        .centered {
-position: relative;
-top: 50%;
-left: 70%;
-transform: translate(-50%, -50%);
+   
+       <link rel="stylesheet" type="text/css" href="style.css">
+       <script>
+        
+		
+	
+function createlist(){
 
-
-}
-         table {
-            border-collapse: collapse;
-            width: 100%;
-            background-color: #ddd
-          }
-          
-          th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid black;
-          }
-        </style>
-       
-<script type="text/javascript" src="./create.js"> </script>
+        var emps = [];
+            var y = window.localStorage.getItem("emps");
+            if (y) {
+                emps = JSON.parse(y);
+            }
+        
+        function displayArrayObjects(arrayObjects) {
+            var len = arrayObjects.length, text = "";
+    
+            for (var i = 0; i < len; i++) {
+                var myObject = arrayObjects[i];
+    
+                text+="<tr>"+"<td>"+myObject.addname+"</td>"
+                +"<td>"+myObject.addemail+"</td>"
+                +"<td>"+myObject.addage+"</td>"
+                +"<td>"+myObject.addsalary+"</td>"
+                +"<td>"+myObject.addremark+"</td>"
+                "</tr>"
+    
+            }
+    
+    
+           document.getElementById("result").innerHTML=text;
+        }
+    
+        displayArrayObjects(emps);    
+    
+        }
+        
+    </script>
 </head>
-<body>
+<body onload="createlist()" >
+        <div class="navbar">
+				<a href="test.html">ADD EMPLOYEE</a>
+				<a href="list.html">DISPLAY</a>
+				<a href="edit.html">SEARCH</a>
+				<a href="edit2.html">EDIT</a>
+
+			  </div>
+			  
 <h3>Employee Details</h3>
-<div class="form-group ">
-    <input type="button" id="button" value="show details" onClick="createlist()" />
-</div>
-<table id="centered" >
+
+<table align="center">
     <thead>
         <tr>
             <th>NAME</th>
@@ -37,6 +58,7 @@ transform: translate(-50%, -50%);
             <th>AGE</th>
             <th>SALARY</th>
             <th>REMARK</th>
+            
         </tr>
     </thead>
     <tbody id="result">

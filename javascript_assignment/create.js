@@ -1,119 +1,147 @@
-function validateForm() 
-{
-	
-  var email1= "priyanka@cronj.com";
-  var email2= document.getElementById("email").value;
-  var password2= "cronjit";
-  var password1= document.getElementById("password").value;
-  if(password1==password2 && email1==email2)
-	window.location="details.html"
-    else
-    document.getElementById("result").innerHTML="EMAIL PASSWORD DOESN'T MATCH";
-}
-function addEmp() {
-    var emps = [];
-    var empname = document.getElementById("name").value;
-    var empemail = document.getElementById("email").value;
-    var empage = document.getElementById("age").value;
-    var empsal = document.getElementById("salary").value;
-    var emprem = document.getElementById("remark").value;
 
+
+function emp() {
     var emps = [];
     var y = window.localStorage.getItem("emps");
     if (y) {
         emps = JSON.parse(y);
     }
     console.log(emps);
-    function ValidateEmail(empmail) 
-    {
-     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(myForm.emailAddr.value))
-      {
-        return (true)
-      }
-        alert("You have entered an invalid email address!")
-        return (false)
-    }
-    if (empname == "" || empemail == "" || empage == "" || empsal == "" || emprem == "")
-        alert("Field Can Not Be Empty");
-    else if (isNaN(empsal) || empsal < 1 || isNaN(empage) || empage < 1)
-        alert("ONLY NUMERIC VALUES ALLOWED");
-    else if(ValidateEmail(empmail))
-    alert("Email");
-    else
+    var empname = document.getElementById("name").value;
+    var empemail = document.getElementById("email").value;
+    var empage = document.getElementById("age").value;
+    var empsal = document.getElementById("salary").value; 3
+    var emprem = document.getElementById("remark").value;
+    if (empname == "")
+        document.getElementById("namecheck").innerHTML = "Field Can Not Be Empty";
+    else if (empemail == "")
+        document.getElementById("emailcheck").innerHTML = "Field Can Not Be Empty";
+    else if (empage == "")
+        document.getElementById("agecheck").innerHTML = "Field Can Not Be Empty";
+    else if (empsal == "")
+        document.getElementById("salcheck").innerHTML = "Field Can Not Be Empty";
+    else if (emprem == "")
+        document.getElementById("remcheck").innerHTML = "Field Can Not Be Empty";
+    else if ((isNaN(empage) || empage < 1 || isNaN(empage) || empage < 1))
+        document.getElementById("agecheck").innerHTML = "Only Numeric values are allowed";
+    else if ((isNaN(empsal) || empsal < 1 || isNaN(empsal) || empsal < 1))
+        document.getElementById("salcheck").innerHTML = "Only Numeric values are allowed";
+    else if (checkemail() == true)
+        document.getElementById("emailcheck").innerHTML = "Email already exists";
+
+    else if (validateemail() == false)
+        document.getElementById("emailcheck").innerHTML = "Email not valid";
+
+    else {
         emps.push({ "addname": empname, "addemail": empemail, "addage": empage, "addsalary": empsal, "addremark": emprem });
-    console.log(emps);
+        document.getElementById("name").value = " ";
+        document.getElementById("email").value = " ";
+        document.getElementById("age").value = " ";
+        document.getElementById("salary").value = " ";
+        document.getElementById("remark").value = " ";
+        document.getElementById("namecheck").innerHTML = " ";
+        document.getElementById("emailcheck").innerHTML = " ";
+        document.getElementById("agecheck").innerHTML= " ";
+        document.getElementById("salcheck").innerHTML = " ";
+        document.getElementById("remcheck").innerHTML = " ";
+        console.log(emps);
 
-    window.localStorage.setItem("emps", JSON.stringify(emps));
-    window.location="details.html"
-}
-   
-    function searchEmp() {
-        var emps = [];
-        var y = window.localStorage.getItem("emps");
-        if (y) {
-            emps = JSON.parse(y);
+    }
+    function validateemail() {
+        var Email = document.myform.email.value;
+        var posat = Email.indexOf("@");
+        var posdot = Email.lastIndexOf(".");
+        if (posat < 1 || posdot < posat + 2 || posdot + 2 >= Email.length) {
+
+            return false;
         }
-        var empname = document.getElementById("search").value;
+        return true;
+    }
+    function checkemail() {
+        var getemail = document.myform.email.value;
         var result = emps.filter(function (emp) {
-            return (emp.addname === empname);
-        }
-        );
-        text="<tr>"+"<td>"+result[0].addname+"</td>"
-        +"<td>"+result[0].addemail+"</td>"
-        +"<td>"+result[0].addage+"</td>"
-        +"<td>"+result[0].addsalary+"</td>"
-        +"<td>"+result[0].addremark+"</td>"
-        "</tr>"
-
-        document.getElementById("res2").innerHTML=text;
-        
+            return (emp.addemail ===getemail);
+        });
+        if(result==""){
+            return false } else { return true };
        
-
-    };
-    function searchE() {
-        var emps = [];
-        var y = window.localStorage.getItem("emps");
-        if (y) {
-            emps = JSON.parse(y);
-        }
-        var empname = document.getElementById("search").value;
-        var result = emps.filter(function (emp) {
-            return (emp.addname === empname);
-        }
-        );
-        window.location = "edit2.html";
-
-
-    };
+    }
+    window.localStorage.setItem("emps", JSON.stringify(emps));
+    console.log(emps);
     
-    function createlist(){
+
+
+
+}
+
+
+function searchEmp() {
+    var emps = [];
+    var y = window.localStorage.getItem("emps");
+    if (y) {
+        emps = JSON.parse(y);
+    }
+    var empname = document.getElementById("search").value;
+    var result = emps.filter(function (emp) {
+        return (emp.addname === empname);
+    }
+    );
+    text = "<tr>" + "<td>" + result[0].addname + "</td>"
+        + "<td>" + result[0].addemail + "</td>"
+        + "<td>" + result[0].addage + "</td>"
+        + "<td>" + result[0].addsalary + "</td>"
+        + "<td>" + result[0].addremark + "</td>"
+    "</tr>"
+
+    document.getElementById("res2").innerHTML = text;
+
+
+
+}
+function searchE() {
+    var emps = [];
+    var y = window.localStorage.getItem("emps");
+    if (y) {
+        emps = JSON.parse(y);
+    }
+    var empname = document.getElementById("search").value;
+    var result = emps.filter(function (emp) {
+        return (emp.addname === empname);
+    }
+    );
+    window.location = "edit2.html";
+
+
+}
+
+function createlist() {
 
     var emps = [];
-        var y = window.localStorage.getItem("emps");
-        if (y) {
-            emps = JSON.parse(y);
-        }
-    
+    var y = window.localStorage.getItem("emps");
+    if (y) {
+        emps = JSON.parse(y);
+    }
+
     function displayArrayObjects(arrayObjects) {
         var len = arrayObjects.length, text = "";
 
         for (var i = 0; i < len; i++) {
             var myObject = arrayObjects[i];
 
-            text+="<tr>"+"<td>"+myObject.addname+"</td>"
-            +"<td>"+myObject.addemail+"</td>"
-            +"<td>"+myObject.addage+"</td>"
-            +"<td>"+myObject.addsalary+"</td>"
-            +"<td>"+myObject.addremark+"</td>"
+            text += "<tr>" + "<td>" + myObject.addname + "</td>"
+                + "<td>" + myObject.addemail + "</td>"
+                + "<td>" + myObject.addage + "</td>"
+                + "<td>" + myObject.addsalary + "</td>"
+                + "<td>" + myObject.addremark + "</td>"
             "</tr>"
 
         }
 
 
-       document.getElementById("result").innerHTML=text;
+        document.getElementById("result").innerHTML = text;
     }
 
-    displayArrayObjects(emps);    
+    displayArrayObjects(emps);
 
-    }
-    
+}
+

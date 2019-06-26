@@ -3,15 +3,19 @@
     height: 400px;	
 }
 table {
-	border-collapse: collapse;
+	
 	width: 100%;
-	background-color: #ddd
+	border: 1px solid black;
+	
   }
+  p {
+    color: red;
+}
   
   th, td {
 	padding: 8px;
 	text-align: left;
-	border-bottom: 1px solid black;
+	
   }
 body, html{
      height: 100%;
@@ -23,16 +27,17 @@ body, html{
 }
 .main{
  	margin:85px 50px;
-	opacity:0.4
+	
 	}
 	
 .main-center{
- 	margin-top: 80px;
+	 margin-top: 80px;
+	 
  	margin: 0 auto;
  	max-width: 400px;
     padding: 10px 40px;
-	background:black;
-	color: #fff;
+	background: #c8ef99;
+	color:black;
     text-shadow: black;
 	}
 	.form-group{
@@ -58,21 +63,16 @@ opacity:0.9
 
 .centered {
 position: relative;
-top: 50%;
+top: 70%;
 left: 70%;
 transform: translate(-50%, -50%);
 
 
 }
-	.centered img {
-		width: 150px;
-		border-radius: 50%;
-	  }
-
 
 ol {
 list-style-type: none;
-float:right
+float:top;
 
 padding: 0;
 overflow: hidden;
@@ -124,5 +124,38 @@ font-size: 16px;
 margin: 4px 2px;
 cursor: pointer;
 }
-	
+.navbar {
+	overflow: hidden;
+	background-color: #333;
+	position: fixed;
+	top: 0;
+	width: 100%;
+  }
+  
+  .navbar a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+  }
+  
+  .navbar a:hover {
+	background: #ddd;
+	color: black;
+  }
+  table {
+	  float:center;
+	border:2px;
+	width: 70%;
+	background-color:#c8ef99;
+  }
+  
+  th, td {
+	padding: 8px;
+	text-align: left;
+	border-bottom: 1px solid black;
+  }
  </style>

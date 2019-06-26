@@ -1,12 +1,41 @@
 <html>
 <head>
-        <script type="text/javascript" src="create.js"> </script>
+	<script>
+		function myFun(){
+		 var emps = [];
+        var y = window.localStorage.getItem("emps");
+        if (y) {
+        emps = JSON.parse(y);
+        }
+		var empname = document.getElementById("ser").value;
+		 
+        var result = emps.filter(function (emp) {
+        return (emp.addname === empname);
+        }
+		);
+		console.log(emps);
+		function res(result){
+			return result[0].addage;
+		}
+		function findWithAttr(emps,field,value){
+			var len = emps.length;
+
+        for (var i = 0; i < len; i++) {
+			if(emps[i][field]===value)
+			return i;
+		}
+	}
+		emps.splice(findWithAttr(emps,"addname",result[0].addname),1);
+	}
+	</script>
+    
 </head>
 <body>
 <form class="example">
 				<input type="text" placeholder="Search.." name="search" id="ser">
-				<input type="button" id="button" value="Search" onClick="del()" />
+				<input type="button" id="button" value="Search" onClick="myFun()" />
 			</form>
+			<p id="demo"> </p>
 
 </body>
 </html>
