@@ -30,6 +30,9 @@ function emp() {
 
     else if (validateemail() == false)
         document.getElementById("emailcheck").innerHTML = "Email not valid";
+    else if(validateName()==false)
+        document.getElementById("namecheck").innerHTML = "Invalid Name";
+
 
     else {
         emps.push({ "addname": empname, "addemail": empemail, "addage": empage, "addsalary": empsal, "addremark": emprem });
@@ -54,6 +57,12 @@ function emp() {
             return false;
         }
         return true;
+    }
+    function validateName(){
+        var validName=/^[A-Z]+$/i;
+        if(validName.test(empname))
+        return true;
+        else return false;
     }
     function checkemail() {
         var getemail = document.myform.email.value;
