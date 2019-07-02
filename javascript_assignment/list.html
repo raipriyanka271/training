@@ -1,72 +1,107 @@
 <html>
+
 <head>
-   
-       <link rel="stylesheet" type="text/css" href="style.css">
-       <script>
-        
-		
-	
-function createlist(){
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
 
         var emps = [];
-            var y = window.localStorage.getItem("emps");
-            if (y) {
-                emps = JSON.parse(y);
+        var empArray = window.localStorage.getItem("emps");
+        if (empArray) {
+            emps = JSON.parse(empArray);
+        }
+
+
+        function createlist() {
+
+
+            function displayArrayObjects(arrayObjects) {
+                var len = arrayObjects.length, text = "";
+
+                for (var i = 0; i < len; i++) {
+                    var myObject = arrayObjects[i];
+
+                    text += "<tr>" + "<td>" + myObject.addname + "</td>"
+                        + "<td>" + myObject.addemail + "</td>"
+                        + "<td>" + myObject.addage + "</td>"
+                        + "<td>" + myObject.addsalary + "</td>"
+                        + "<td>" + myObject.addremark + "</td>"
+                        + "<td><input type='button' value='Delete' id='delete_" + i + "' onClick='deleteTest(" + i + ")'></td>"
+                       
+                    "</tr>"
+
+                }
+
+
+                document.getElementById("result").innerHTML = text;
             }
-        
-        function displayArrayObjects(arrayObjects) {
-            var len = arrayObjects.length, text = "";
-    
+
+            displayArrayObjects(emps);
+
+        }
+        function deleteTest(index) {
+            emps.splice(index, 1);
+            console.log(emps);
+            var empArray = window.localStorage.getItem("emps");
+            var len = emps.length, text = "";
+
             for (var i = 0; i < len; i++) {
-                var myObject = arrayObjects[i];
-    
-                text+="<tr>"+"<td>"+myObject.addname+"</td>"
-                +"<td>"+myObject.addemail+"</td>"
-                +"<td>"+myObject.addage+"</td>"
-                +"<td>"+myObject.addsalary+"</td>"
-                +"<td>"+myObject.addremark+"</td>"
+                var myObject = emps[i];
+
+                text += "<tr>" + "<td>" + myObject.addname + "</td>"
+                    + "<td>" + myObject.addemail + "</td>"
+                    + "<td>" + myObject.addage + "</td>"
+                    + "<td>" + myObject.addsalary + "</td>"
+                    + "<td>" + myObject.addremark + "</td>"
+                    + "<td><input type='button' value='Delete' id='delete_" + i + "' onClick='deleteTest(" + i + ")'></td>"
+                    + "<td><input type='button' value='Edit' id='edit_" + i + "' onClick='editTest(" + i + ")'></td>"
+
                 "</tr>"
-    
+
             }
-    
-    
-           document.getElementById("result").innerHTML=text;
+
+
+            document.getElementById("result").innerHTML = text;
+            window.localStorage.setItem("emps", JSON.stringify(emps));
+
         }
-    
-        displayArrayObjects(emps);    
-    
+        function editTest(index){
+            windoews.location="edit2.html";
         }
+
         
     </script>
 </head>
-<body onload="createlist()" >
-        <div class="navbar">
-				<a href="test.html">ADD EMPLOYEE</a>
-				<a href="list.html">DISPLAY</a>
-				<a href="edit.html">SEARCH</a>
-				<a href="edit2.html">EDIT</a>
 
-			  </div>
-			  
-<h3>Employee Details</h3>
+<body onload="createlist()">
+    <div class="navbar">
+        <a href="test.html">ADD EMPLOYEE</a>
+        <a href="list.html">DISPLAY</a>
+        <a href="edit.html">SEARCH</a>
+        <a href="edit2.html">EDIT</a>
 
-<table align="center">
-    <thead>
-        <tr>
-            <th>NAME</th>
-            <th>EMAIL</th>
-            <th>AGE</th>
-            <th>SALARY</th>
-            <th>REMARK</th>
-            <th>Delete</th>
-            
-            
-        </tr>
-    </thead>
-    <tbody id="result">
+    </div>
 
-    </tbody>
-</table>
-</div>
+    <h3>Employee Details</h3>
+
+    <table align="center">
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>AGE</th>
+                <th>SALARY</th>
+                <th>REMARK</th>
+                <th>Delete</th>
+
+
+            </tr>
+        </thead>
+        <tbody id="result">
+
+        </tbody>
+    </table>
+    </div>
 </body>
+
 </html>

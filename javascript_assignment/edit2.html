@@ -1,133 +1,151 @@
 <html>
-    <head>
-        <script >
-       function searchE(){
 
-			var emps = [];
-			var y = window.localStorage.getItem("emps");
-			if (y) {
-				emps = JSON.parse(y);
-			}
-			var empname = document.getElementById("search").value;
-			var result = emps.filter(function (emp) {
-				return (emp.addname === empname);
-			}
-            );
-           
-        document.getElementById("name").value=result[0].addname;
-        document.getElementById("email").value=result[0].addemail;
-        document.getElementById("age").value=result[0].addage;
-        document.getElementById("salary").value=result[0].addsalary;
-        document.getElementById("remark").value=result[0].addremark;
-       }
-       function myFun(){
-		 var emps = [];
+<head>
+    <script>
+        var emps = [];
         var y = window.localStorage.getItem("emps");
         if (y) {
-        emps = JSON.parse(y);
+            emps = JSON.parse(y);
         }
-		var empname = document.getElementById("ser").value;
-		 
-        var result = emps.filter(function (emp) {
-        return (emp.addname === empname);
-        }
-		);
-		console.log(emps);
-		function res(result){
-			return result[0].addage;
-		}
-		function findWithAttr(emps,field,value){
-			var len = emps.length;
+        function searchE() {
 
-        for (var i = 0; i < len; i++) {
-			if(emps[i][field]===value)
-			return i;
-		}
-	}   var num=findWithAttr(emps,"addname",result[0].addname);
-         emps.splice(num,1);
-         console.log(emps);
-	}
-    
-       
-            </script> 
-        <link rel="stylesheet" type="text/css" href="style.css">
-       
-    </head>
+            // console.log("okay");
+            var empname = document.getElementById("search").value;
+            // console.log(empname);
+            var result = emps.filter(function (emp) {
+                return (emp.addname === empname);
+            });
+
+
+
+
+            document.getElementById("name").value = result[0].addname;
+            document.getElementById("email").value = result[0].addemail;
+            document.getElementById("age").value = result[0].addage;
+            document.getElementById("salary").value = result[0].addsalary;
+            document.getElementById("remark").value = result[0].addremark;
+            var num = 0;
+            for (let i = 0; i < emps.length; i++) {
+                if (emps[i].addname == empname) {
+                    num = i;
+                }
+            }
+            console.log(num);
+            emps.splice(num, 1);
+        }
+
+        //  function findIdx(){
+        //           // 
+        //     var empname = document.getElementById("search").value;
+        //     console.log(empname);
+        //     var num=0;
+        //         for(let i=0;i<emps.length;i++){ 
+        //             if(emps[i].addname==result){    
+        //             num=i;
+        //             break;
+        //             }
+        //         }
+
+        //         return num;
+        //  }
+        //  console.log(findIdx());
+        function editEmp() {
+            var empname = document.getElementById("search").value;
+            console.log(empname);
+
+
+            var empname = document.getElementById("name").value;
+            var empemail = document.getElementById("email").value;
+            var empage = document.getElementById("age").value;
+            var empsal = document.getElementById("salary").value;
+            var emprem = document.getElementById("remark").value;
+
+            emps.push({ "addname": empname, "addemail": empemail, "addage": empage, "addsalary": empsal, "addremark": emprem });
+            window.localStorage.setItem("emps", JSON.stringify(emps));
+        }
+
+
+    </script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body>
+
     <body>
-            <body>
-                    <div class="navbar">
-                            <a href="test.html">ADD EMPLOYEE</a>
-                            <a href="list.html">DISPLAY</a>
-                            <a href="edit.html">SEARCH</a>
-                            <a href="edit2.html">EDIT</a>
-            
-                          </div>
-                          
-                    <div class="container">
-                        <div class="row main">
-                            <div class="main-login main-center">
-                                <h1>Edit Employee</h1>
-                                            
-                                        <form class="example">
-                                                <input type="text" placeholder="Search.." name="search" id="search">
-                                                <input type="button" id="button" value="Edit" onClick="searchE()" />
-                                            </form>
-                                                                              
-                        
-                                    <div class="form-group">
-                                        <label for="name" class="cols-sm-2 control-label">Name;</label>
-                                        <div class="cols-sm-10">
-                                            <div class="input-group">
-                
-                                                <input type="text" class="form-control"  id="name" >
-                                                   
-                                            </div>
-                                        </div>
-                                    </div>
-                
-                                    <div class="form-group">
-                                        <label for="email" class="cols-sm-2 control-label">Email</label>
-                                        <div class="cols-sm-10">
-                                            <div class="input-group">
-                                                <input type="email" class="form-control" name="email" id="email"
-                                                    placeholder="Employee Email" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="age" class="cols-sm-2 control-label">Age</label>
-                                        <div class="cols-sm-10">
-                                            <div class="input-group">
-                                                <input type="age" class="form-control" name="age" id="age" placeholder="Employee Age" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="salary" class="cols-sm-2 control-label">Salary</label>
-                                        <div class="cols-sm-10">
-                                            <div class="input-group">
-                                                <input type="salary" class="form-control" name="salary" id="salary"
-                                                    placeholder="Employee Salary" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="remark" class="cols-sm-2 control-label">Remarks</label>
-                                        <div class="cols-sm-10">
-                                            <div class="input-group">
-                                                <input type="remark" class="form-control" name="remark" id="remark"
-                                                    placeholder="Remark" />
-                                            </div>
-                                        </div>
-                                    </div>
-                
-                                    <div class="form-group ">
-                                        <input type="button" id="button" value="Submit" onClick="addEmp()">
-                                    </div>
-                
-                                </form>
+        <div class="navbar">
+            <a href="test.html">ADD EMPLOYEE</a>
+            <a href="list.html">DISPLAY</a>
+            <a href="edit.html">SEARCH</a>
+            <a href="edit2.html">EDIT</a>
+
+        </div>
+
+        <div class="container">
+            <div class="row main">
+                <div class="main-login main-center">
+                    <h1>Edit Employee</h1>
+
+                    <form class="form-control">
+                        <input type="text" placeholder="Search.." name="search" id="search">
+                        <input type="button" id="button" value="Edit" onClick="searchE()" />
+                    </form>
+
+
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label">Name</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="name" placeholder="Employee Name" />
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label">Email</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="email" id="email"
+                                    placeholder="Employee Email" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="age" class="cols-sm-2 control-label">Age</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <input type="age" class="form-control" name="age" id="age" placeholder="Employee Age" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="salary" class="cols-sm-2 control-label">Salary</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <input type="salary" class="form-control" name="salary" id="salary"
+                                    placeholder="Employee Salary" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="remark" class="cols-sm-2 control-label">Remarks</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <input type="remark" class="form-control" name="remark" id="remark"
+                                    placeholder="Remark" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <input type="button" id="button" value="Submit" onClick="editEmp()">
+                    </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
+
 </html>
