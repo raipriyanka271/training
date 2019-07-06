@@ -1,33 +1,73 @@
-.App {
+
+
+.mainform {
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 20px 40px;  
+    background-color:#1e192c;
+    color:white;
+ 
+    
+} table {
+  padding: 60px;
+  border-spacing: 5;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 50%;
+  margin: 0 auto;
+  
+  margin-top: 100px;
+    max-width: 700px;
+    color:black;
+   
+}
+table td, table th {
+  padding-left: 8px;
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+th {
+  height: 60px;
+  background: #1e192c;
+  color:white
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+table td tr {
+  
+  height: 50px;
+  text-align: center;
 }
-
-.App-link {
-  color: #61dafb;
+.comp{
+  background-color:rgb(106, 152, 238);
 }
+.incomp{
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  background:#C1F578   ;
+}
+.button1 {
+  background-color: #C1F578  ;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.button {
+ 
+  text-align: center;
+  
+  /* font-size: 10px;
+  margin: 4px 2px; */
+  cursor: pointer;
+  border-radius: 2px;
+  /* background-color:rgb(176, 243, 113); */
+  color:black;
+  background: transparent;
+  
+  border-color:rgb(211, 230, 193);
 }

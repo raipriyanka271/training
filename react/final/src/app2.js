@@ -1,42 +1,43 @@
-import React, {Component} from 'react';
-// import React from 'react';
-
+import React, { Component } from 'react';
 import './App.css';
+import Form from "./Form"
 
-class app2 extends Component{
- 
-  constructor(props){
-      super(props)
-      this.state={
-          num: 0
-      }
-      this.sum = this.sum.bind(this);
-      this.minus = this.minus.bind(this);
-  }
-  sum(){
+class App2 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { Formname: " ", Formage: " " };
 
-    this.setState({num:this.state.num+1});
-  }
- minus(){
+        this.display = this.display.bind(this);
 
-   this.setState({num:this.state.num-1});
- }
+    }
+    display(name, age) {
+        this.setState({
+            Formname: name,
+            Formage: age
+        });
+    };
 
- render(){
-  
-  return (
-    <div className="app2">
-      {(this.state.num>=10||this.state.num <= 0) ?
-      (this.state.num>=10) ?
-      <button onClick={this.minus}>-</button>:
-      <button onClick={this.sum}>+</button>:
-      <p> <button onClick={this.sum}>+</button>
-      <button onClick={this.minus}>-</button></p>}
-      <p>{this.state.num}</p>
-    </div>
-  );
+
+    render() {
+        return ( 
+        <div>
+        <div className = "mainform" >
+
+            <Form display = { this.display } />
+            
+            <div className="label">
+            
+             < br / >
+                Name: < label > { this.state.Formname }  </label> 
+                < br / >
+                Age: < label > { this.state.Formage } </label> 
+            </div>
+
+                
+            </div>    
+        </div>
+
+        );
+    }
 }
-}
-
-
-export default app2;
+export default App2;
