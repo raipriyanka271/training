@@ -10,6 +10,7 @@
         if (empArray) {
             emps = JSON.parse(empArray);
         }
+        
 
 
         function createlist() {
@@ -17,6 +18,7 @@
 
             function displayArrayObjects(arrayObjects) {
                 var len = arrayObjects.length, text = "";
+                console.log(arrayObjects)
 
                 for (var i = 0; i < len; i++) {
                     var myObject = arrayObjects[i];
@@ -62,11 +64,12 @@
 
 
             document.getElementById("result").innerHTML = text;
+           
             window.localStorage.setItem("emps", JSON.stringify(emps));
 
         }
         function editTest(index){
-            windoews.location="edit2.html";
+            windows.location="edit2.html";
         }
 
         

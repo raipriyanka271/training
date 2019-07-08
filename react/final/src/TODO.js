@@ -165,8 +165,7 @@ class TODO extends React.Component {
                 <div className="LEFT">
                     <table className="table">
                         <tr>
-                        {/* input type="button" value="Sort" onClick={this.taskSortB} /> */}
-                        {/* <input type="button" value="Sort" onClick={this.taskSortA} /> */}
+            
                             <th>Task</th>
                             <th>Time</th>
                             <th>Priority</th>
