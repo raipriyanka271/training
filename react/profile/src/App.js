@@ -128,14 +128,10 @@ class App extends Component {
               <p className="detail"><Icon type="global" />{item.website}</p>
             </div>
               <div className="iconContainer">
-              <button>Button <i {this.state.likes=="false" ? class="fa fa-heart":class="fa fa-heart></i></button>
-
-          
-                <Button type="link" className="iconItem" icon="edit" onClick={() => this.showModal(index)} />
-                
-
-                <Button type="link" className="iconItem" icon="delete" onClick={() => this.delete(index)} />
-
+            
+                 <Icon className="iconheart" onClick={this.like} type="heart"  theme={this.state.likes ? 'filled' : 'outlined' }/>
+                 <Icon className="iconitem" onClick={this.showModal} type="edit"  ></Icon>
+                  <Icon className="iconitem" onClick={this.delete} type="delete"  ></Icon>
 
 
               </div>
