@@ -1,0 +1,131 @@
+import React from 'react';
+import './App.css';
+import { Icon } from 'antd';
+import { Modal, Button } from 'antd';
+export default class TaskList extends React.Component {
+    constructor(props){
+        super(props);
+        
+        this.handledelete = this.handledelete.bind(this);
+        this.handleupdate = this.handleupdate.bind(this);
+        this.handlesort = this.handlesort.bind(this);
+        this.handledatesort = this.handledatesort.bind(this);
+       
+    }
+    handledatesort(){
+        this.props.dateSort();
+    }
+    
+    handledelete(event,i){
+        
+        
+        this.props.deleteTask(i);
+        // event.preventDefault();
+        
+    }
+    handleupdate(event,i){
+    
+        this.props.updateTask(i);
+      
+        
+    }
+    handlesort(){
+
+        this.props.prioritySort();
+    }
+    handleedit(i){
+
+        // this.props.editTask(i);
+    }
+
+    render() {
+        
+        var taskShow;
+       this.props.filtercompCheck==="true" ?
+    //    console.log(filterComp)
+            taskShow = this.props.filterComp.map((task, i) => {
+                return (
+                    <tr className="comp" key={i}>
+                        <td>{task.name}</td>
+                        <td>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: "2-digit" }).format(new Date(Date.parse(task.time)))}</td>
+                        <td>{task.priority}</td>
+                        <td>{task.status}</td>
+                         <td><Icon className="iconItem" type="caret-down" onClick={(e) => this.handleupdate(e, i)}></Icon></td>
+                        <td><Icon className="iconItem" type="close" onClick={(e) => this.handledelete(e, i)}></Icon></td>  
+                        <td><Icon className="iconItem" type="edit" onClick={(e) => this.handleedit(e, i)}></Icon></td>  
+                    </tr>
+                );
+            })
+        
+        :
+        
+    
+         taskShow = this.props.tasks.map((task, i) => {
+            return (
+                <tr tr className={task.status == "Completed" ? "comp" : "incomp"} key={i}>
+                    <td>{task.name}</td>
+                    <td>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: "2-digit" }).format(new Date(Date.parse(task.time)))}</td>
+                    <td>{task.priority}</td>
+                    <td>{task.status}</td>
+                    <td><Icon className="iconItem" type="check" onClick={(e) => this.handleupdate(e, i)}></Icon></td>
+                    <td><Icon className="iconItem" type="close" onClick={(e) => this.handledelete(e, i)}></Icon></td> 
+                    <td><Icon className="iconItem" type="edit" onClick={(e) => this.handleedit(e, i)}></Icon></td>  
+                </tr>
+                <div>
+                 <Modal
+                 visible={visible}
+                 title="Create a new collection"
+                 okText="Create"
+                 onCancel={onCancel}
+                 onOk={onCreate}
+               >
+                 <Form layout="vertical">
+                   <Form.Item label="Title">
+                     {getFieldDecorator('title', {
+                       rules: [{ required: true, message: 'Please input the title of collection!' }],
+                     })(<Input />)}
+                   </Form.Item>
+                   <Form.Item label="Description">
+                     {getFieldDecorator('description')(<Input type="textarea" />)}
+                   </Form.Item>
+                   <Form.Item className="collection-create-form_last-form-item">
+                     {getFieldDecorator('modifier', {
+                       initialValue: 'public',
+                     })(
+
+                     )}
+                   </Form.Item>
+                 </Form>
+               </Modal>
+               </div>
+            );
+        };
+       
+        
+        return (
+            <div className="LEFT">
+                <table className="table">
+                    <thead>
+                        <tr key={"heading"} className="incomp">
+                            <th>Task</th>
+                            <th>DateTime <Icon className="iconItem" type="caret-down" onClick={this.handledatesort} ></Icon></th>
+                            <th>Priority <Icon className="iconItem" type="caret-down" onClick={this.handlesort} ></Icon></th>
+                            <th>Status</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                            <th>Edit</th>
+                            </tr>
+                       
+                    </thead>
+                    <tbody>
+                        {taskShow}
+                    </tbody>
+                </table>
+            </div>
+
+        )
+        }
+    
+        
+    
+}

@@ -4,19 +4,13 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <script>
-
         var emps = [];
         var empArray = window.localStorage.getItem("emps");
         if (empArray) {
             emps = JSON.parse(empArray);
         }
-        
-
-
         function createlist() {
-
-
-            function displayArrayObjects(arrayObjects) {
+        function displayArrayObjects(arrayObjects) {
                 var len = arrayObjects.length, text = "";
                 console.log(arrayObjects)
 

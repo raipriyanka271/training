@@ -1,0 +1,123 @@
+import React, { Component } from 'react';
+import './App.css';
+import { Icon } from 'antd';
+import { Modal, Button } from 'antd';
+import SingleReport from './SingleReportComponent';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      reports: [],
+      asc:true,
+      Dasc:true,
+      filterarr:[],
+      filtercheck:false
+
+    }
+    this.search=this.search.bind(this);  
+    this.filterrange=this.filterrange.bind(this);
+    this.sortDate=this.sortDate.bind(this);
+    this.sortCost=this.sortCost.bind(this);
+
+  }
+  sortCost(){
+    
+    fetch('http://localhost:4000/api/data/1')
+    
+    .then(response => response.json())
+    .then(data => this.setState({ reports: data }));
+   
+    
+      
+  }
+  sortDate(){
+    
+  }
+  search(event){
+
+    event.preventDefault();
+    console.log(event.target.elements.searchT.value)
+    fetch('http://localhost:4000/api/'+ event.target.elements.searchT.value)
+  
+    .then(response => response.json())
+    .then(data => this.setState({ reports: data }));
+    
+
+  }
+  filterrange(event){
+    event.preventDefault();
+    console.log(event.target.elements.max.value);
+    fetch('http://localhost:4000/api/'+ event.target.elements.min.value +'/'+ event.target.elements.max.value)
+  
+    .then(response => response.json())
+    .then(data => this.setState({ filterarr: data ,filtercheck:true}));
+    
+  }
+  componentDidMount() {
+    fetch('http://localhost:4000/api')
+  
+      .then(response => response.json())
+      .then(data => this.setState({ reports: data }));
+     
+  }
+  
+  render() {
+    
+    // let list=[];
+    // let newArray = this.states.filtercheck ? this.state.filterarr : this.state.reports;
+    // const modifiedlist =newArray.map((Singlereport, index) => {
+      
+     
+//     <div className="itemflex" >
+//    <div> <p className="imageflex"> <img src={"https://via.placeholder.com/200"}></img> </p>
+//     <p className="detail">{"Title : "}{Singlereport.title} </p>
+//     <p className="detail">{"Description : "}{Singlereport.description}</p>
+//     <p className="detail">{"Published Date : "}{Singlereport.publishedDate} </p>
+//     <p className="detail">{"Cost : "}{Singlereport.cost}</p>
+  
+// </div>
+// </div>
+const Report = this.state.reports.map((SingleReport, index) => {
+  return (
+    <div>
+      <SingleReport user={SingleReport} />
+    </div>
+  );
+})
+ 
+
+    
+    return (
+      <div className="main">
+        <div className="formdiv">
+        <form onSubmit={this.search}>
+          <input type="text" className="search" id="searchT" placeholder="search"></input>
+          
+          <input type="submit" placeholder="filter"></input>
+      
+      
+      </form>
+      <form onSubmit={this.filterrange}>
+        <h3>Filter by cost</h3>
+        Min:<input type="number" id="min"></input>
+        Max:<input type="number" id="max"></input>
+        <input type="submit" placeholder="filter"></input>
+      </form>
+      <br></br>
+      <button  onClick={this.sortDate}>SORT DATE</button>
+      <button  onClick={this.sortCost}>SORT COST</button>
+
+        </div>
+     
+        
+         <div className="container">
+          {Report}
+        </div> 
+        </div>
+    )
+  }
+}
+
+export default App;
+

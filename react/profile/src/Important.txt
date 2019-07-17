@@ -62,7 +62,7 @@ class App extends Component {
     // console.log(this.state.users);
     // console.log(this.state.current);
     this.setState({
-      visible:false
+     // visible:false
     })
     
 
@@ -128,13 +128,10 @@ class App extends Component {
               <p className="detail"><Icon type="global" />{item.website}</p>
             </div>
               <div className="iconContainer">
-
-                <Button type="link" className="iconheart" icon="heart" onClick={() => this.like()}/>
-                <Button type="link" className="iconItem" icon="edit" onClick={() => this.showModal(index)} />
-                
-
-                <Button type="link" className="iconItem" icon="delete" onClick={() => this.delete(index)} />
-
+            
+                 <Icon className="iconheart" onClick={this.like} type="heart"  theme={this.state.likes ? 'filled' : 'outlined' }/>
+                 <Icon className="iconitem" onClick={this.showModal} type="edit"  ></Icon>
+                  <Icon className="iconitem" onClick={this.delete} type="delete"  ></Icon>
 
 
               </div>
@@ -155,20 +152,40 @@ class App extends Component {
                     <form className="mainform" onSubmit="handleSubmit()">
 
 
-                      Name : < input className="formdiv" id="user_name" type="text" value={this.state.users[this.state.current]==null?"":this.state.users[this.state.current].email} onChange={(e,index)=>this.setnameState(e,index)} />
+                      Name : < input className="formdiv" id="user_name" type="text" value=
+                      {this.state.users[this.state.current]==null?"":this.state.users[this.state.current].name} onChange={(e)=> {
+                        let ar = this.state.users;
+                        let index = this.state.current;
+                        ar[index].name = e.target.value;
+                        this.setState({users: ar})}} />
                       <br></br>
                       
 
                        Email : < input className="formdiv" id="email" type="text" value=
-                      {this.state.users[this.state.current]==null?"":this.state.users[this.state.current].email} onChange={this.setemailState(this.state.current)}/>
+                      {this.state.users[this.state.current]==null?"":this.state.users[this.state.current].email} onChange={(e)=>{
+                        let ar=this.state.users;
+                        let index=this.state.current;
+                        ar[index].email=e.target.value;
+                        this.setState({users:ar})}}/>
+                   
                      
                       <br></br>
                       Call : <input id="call" className="formdiv"  type="text" value=
-                      {this.state.users[this.state.current]==null?"":this.state.users[this.state.current].phone} onChange={this.setcallState(this.state.current)}/>
+                      {this.state.users[this.state.current]==null?"":this.state.users[this.state.current].phone} onChange={(e)=>{
+                        let ar=this.state.users;
+                        let index=this.state.current;
+                        ar[index].phone=e.target.value;
+                        this.setState({users:ar})}}/>
+                  
                       
                       <br></br>
                       Website : <input id="web" className="formdiv"  type="text" value=
-                      {this.state.users[this.state.current]==null?"":this.state.users[this.state.current].website} onChange={this.setwebState(this.state.current)}/> 
+                      {this.state.users[this.state.current]==null?"":this.state.users[this.state.current].website} onChange={(e)=>{
+                        let ar=this.state.users;
+                        let index=this.state.current;
+                        ar[index].website=e.target.value;
+                        this.setState({users:ar})
+                      }}/>
                       
                       <br></br>
               

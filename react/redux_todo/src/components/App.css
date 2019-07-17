@@ -1,0 +1,129 @@
+@import '~antd/dist/antd.css'; 
+.content{
+  text-align: left;
+  margin:20 px;
+  background-color:rgb(191, 245, 147);  
+}
+.button2{
+  background-color:rgb(166, 192, 226);  
+  text-emphasis: size 10px;
+  margin-left:40px
+}
+
+.mainform {
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 20px 40px;  
+     /* background-color:#eee8e8; 
+    color:black;
+    /* opacity:0.4; */
+  
+    
+} 
+
+table {
+  padding: 60px;
+  border-spacing: 5;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 70%;
+  margin: 0 auto;
+  
+  margin-top: 100px;
+    /* max-width: 700px; */
+    color:black;
+   
+}
+th{
+  height:60px;
+  background-color:rgb(246, 246, 250);
+  border:1px rgb(124, 122, 122);
+  text-align: center;
+}
+td{
+  text-align: center;
+}
+
+
+
+
+.comp{
+  background-color:rgb(166, 192, 226);
+}
+.incomp{
+
+  background:rgb(221, 220, 220)   ;
+}
+.button1 {
+  background-color: rgb(243, 245, 240)  ;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.button {
+ 
+  text-align: center;
+  
+  /* font-size: 10px;
+  margin: 4px 2px; */
+  cursor: pointer;
+  border-radius: 4px;
+  /* background-color:rgb(176, 243, 113); */
+  color:black;
+  background: transparent;
+  
+  border-color:rgb(250, 252, 248);
+}
+
+.form-inline {  
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: rgb(239, 243, 247);
+  border: 1px solid #ddd;
+  color: rgb(5, 5, 5);
+  cursor: pointer;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+  .form-inline select {
+    margin: 10px 0;
+  }
+}
+  
+  .form-inline {
+    flex-direction: row-column;
+    /* align-items: stretch; */
+  }
