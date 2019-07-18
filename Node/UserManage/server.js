@@ -55,12 +55,15 @@ app.post('/create', (req, res) => {
     age: findage(req.body.dob)
 
   }, function (err, response) {
-    if (err) return handleError(err);
+    if (err) {
+      console.log(err);
+      res.send("Could not create user")
+    }
     else {
-      console.log('inserted');
+      res.send('Inserted');
     }
   });
-  res.send('saved');
+  
 
 });
 
@@ -68,9 +71,14 @@ app.get('/find/:id', (req, res) => {
   user.find({
     userId: req.params.id
   }, function (err, response) {
-    if (err) return handleError(err);
+    if (err) {
+      console.log(err);
+    }
     else {
+      if(response.length===0)res.send("User does not exist");
+      else{
       res.send(response);
+      }
     }
   });
 });
@@ -78,12 +86,18 @@ app.get('/find/:id', (req, res) => {
 
 app.get('/filterage/:age', (req, res) => {
   user.find({ age: { $gte: req.params.age } }, function (err, response) {
-    if (err) return handleError(err);
+    if (err) {
+      console.log(err);
+      res.send("could not connect");
+    }
     else {
+      if(response.length===0)res.send("User does not exist");
+      else{
       res.send(response);
     }
-  });
+  };
 });
+})
 
 
 
@@ -91,11 +105,16 @@ app.get('/filtername/:name', (req, res) => {
   user.find({
     name: req.params.name
   }, function (err, response) {
-    if (err) return handleError(err);
+    if (err) {
+      console.log(err);
+      res.send("could not connect")
+    }
     else {
+      if(response.length===0)res.send("User does not exist");
+      else{
       res.send(response);
     }
-  });
+   } });
 });
 
 
@@ -103,10 +122,15 @@ app.get('/filterprof/:profession', (req, res) => {
   user.find({
     profession: req.params.profession
   }, function (err, response) {
-    if (err) return handleError(err);
-    else {
-      res.send(response);
+    if (err) {
+      console.log(err);
+      res.send("could not connect")
     }
+    else {
+      if(response.length===0)res.send("User does not exist");
+      else{
+      res.send(response);
+    }}
   });
 });
 
@@ -115,10 +139,15 @@ app.get('/filtercity/:address', (req, res) => {
   user.find({
     address: { $regex: req.params.address, $options: 'i' }
   }, function (err, response) {
-    if (err) return handleError(err);
-    else {
-      res.send(response);
+    if (err) {
+      console.log(err);
+      res.send("could not connect")
     }
+    else {
+      if(response.length===0)res.send("User does not exist");
+      else{
+      res.send(response);
+    }}
   });
 });
 
@@ -127,10 +156,15 @@ app.get('/filtergender/:gender', (req, res) => {
   user.find({
     gender: req.params.gender
   }, function (err, response) {
-    if (err) return handleError(err);
-    else {
-      res.send(response);
+    if (err) {
+      console.log(err);
+      res.send("could not connect")
     }
+    else {
+      if(response.length===0)res.send("User does not exist");
+      else{
+      res.send(response);
+    }}
   });
 });
 
@@ -146,31 +180,45 @@ app.get('/update/:id', (req, res) => {
   }
   user.findOneAndUpdate({ userId: req.params.id }, obj)
     .then((user) => {
-      console.log(response)
-      res.send(response)
+      console.log(user)
+      res.send(user)
     })
 
 });
+app.get('/search/', (req, res) => {
+  let searchQuery=req.query;
+  let obj={};
+ if(searchQuery.hasOwnProperty('name'))
+  obj={...obj,name:{$regex:searchQuery.name}}
+  if(searchQuery.hasOwnProperty('age'))
+    obj={...obj,age:parseInt(searchQuery.age)}
+  if(searchQuery.hasOwnProperty('profession'))
+  obj={...obj,profession:searchQuery.profession}
+  if(searchQuery.hasOwnProperty('gender'))
+  obj={...obj,gender:searchQuery.gender}
+  console.log(obj)
+
+  user.find(obj, function (err, response) {
+     if (err) {
+       console.log(err);
+       res.send("could not connect")
+     }
+     else {
+       if(response.length===0)res.send("User does not exist");
+       else{
+       res.send(response);
+     }}
+   });
+})
 
 app.get('/delete/:id', (req, res) => {
   user.deleteOne({ userId: req.params.id }, function (err) {
-    if (err) return handleError(err);
+    if (err) {
+      console.log(err);
+      res.send("user does not exist!")
+    } else
+    res.send("Deleted!")
   });
 });
-//For compund query
 
-// app.post('/userquery', (req, res) => {
-//   let URL = 'http://localhost:5000/user/param1?=val1&param2=val2';
-//   let parsedUrl = url.parse(URL);
-//   let parsedQs = querystring.parse(parsedUrl.query);
-//   Console.log(parsedQs)
-//   user.find({ }, function (err, response) {
-//       if (err) return handleError(err);
-//       else {
-//         console.log('USER FOUND');
-//       }
-//     });
-//   res.send('USER FOUND');
-
-// });
 app.listen(port)
