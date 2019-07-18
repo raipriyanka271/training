@@ -57,7 +57,7 @@ app.post('/create', (req, res) => {
   }, function (err, response) {
     if (err) {
       console.log(err);
-      res.send("Could not create user")
+      res.status(500).send("Could not create user")
     }
     else {
       res.send('Inserted');
@@ -75,7 +75,7 @@ app.get('/find/:id', (req, res) => {
       console.log(err);
     }
     else {
-      if(response.length===0)res.send("User does not exist");
+      if(response.length===0)res.status(404).send("User does not exist");
       else{
       res.send(response);
       }
@@ -91,7 +91,7 @@ app.get('/filterage/:age', (req, res) => {
       res.send("could not connect");
     }
     else {
-      if(response.length===0)res.send("User does not exist");
+      if(response.length===0)res.status(400).send("User does not exist");
       else{
       res.send(response);
     }
@@ -107,10 +107,10 @@ app.get('/filtername/:name', (req, res) => {
   }, function (err, response) {
     if (err) {
       console.log(err);
-      res.send("could not connect")
+      res.status(400).send("could not connect")
     }
     else {
-      if(response.length===0)res.send("User does not exist");
+      if(response.length===0)res.status(404).send("User does not exist");
       else{
       res.send(response);
     }
@@ -127,7 +127,7 @@ app.get('/filterprof/:profession', (req, res) => {
       res.send("could not connect")
     }
     else {
-      if(response.length===0)res.send("User does not exist");
+      if(response.length===0)res.status(404).send("User does not exist");
       else{
       res.send(response);
     }}
@@ -144,7 +144,7 @@ app.get('/filtercity/:address', (req, res) => {
       res.send("could not connect")
     }
     else {
-      if(response.length===0)res.send("User does not exist");
+      if(response.length===0)res.status(404).send("User does not exist");
       else{
       res.send(response);
     }}
@@ -161,9 +161,9 @@ app.get('/filtergender/:gender', (req, res) => {
       res.send("could not connect")
     }
     else {
-      if(response.length===0)res.send("User does not exist");
+      if(response.length===0)res.status(404).send("User does not exist");
       else{
-      res.send(response);
+      res.send(response)
     }}
   });
 });
@@ -204,7 +204,7 @@ app.get('/search/', (req, res) => {
        res.send("could not connect")
      }
      else {
-       if(response.length===0)res.send("User does not exist");
+       if(response.length===0)res.status(404).send("User does not exist");
        else{
        res.send(response);
      }}
@@ -215,7 +215,7 @@ app.get('/delete/:id', (req, res) => {
   user.deleteOne({ userId: req.params.id }, function (err) {
     if (err) {
       console.log(err);
-      res.send("user does not exist!")
+      res.status(404).send("user does not exist!")
     } else
     res.send("Deleted!")
   });
