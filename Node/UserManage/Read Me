@@ -1,4 +1,4 @@
-Start : server.js
+Start : nodemon server.js
 
 End Points:
 
