@@ -37,12 +37,14 @@ function getuuid() {
 };
 function findage(dob) {
   console.log(dob)
+  let current
   let date1 = new Date();
   var date2 = new Date(dob); 
-  var diff = new DateDiff(date1, date2);
+  let diff = new DateDiff(date1, date2);
   console.log(date1);
   console.log(date2);
-  return diff.years();
+  let result=diff.years();
+  return  Math.floor(result);
   
 }
 app.post('/create', (req, res) => {
@@ -64,23 +66,18 @@ app.post('/create', (req, res) => {
   res.send('saved');
 
 });
-app.post('/', (req, res) => {
-  user.create({
-    userId: getuuid(),
-    name: req.body.name,
-    dob: req.body.dob,
-    gender: req.body.gender,
-    address: req.body.address,
-    profession: req.body.profession,
-    age: findage(req.body.dob)
+app.post('/user', (req, res) => {
+let param1
+  user.find({
+  
 
   }, function (err, response) {
     if (err) return handleError(err);
     else {
-      console.log('inserted');
+      console.log('USER FOUND');
     }
   });
-  res.send('saved');
+  res.send('USER FOUND');
 
 });
 app.get('/find/:id', (req, res) => {
