@@ -3,6 +3,8 @@ const app = express()
 const port = 5000
 app.use(express.json());
 var DateDiff = require('date-diff');
+const url = require('url');
+const querystring = require('querystring');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/userdb', { useNewUrlParser: true });
@@ -44,6 +46,25 @@ function findage(dob) {
   
 }
 app.post('/create', (req, res) => {
+  user.create({
+    userId: getuuid(),
+    name: req.body.name,
+    dob: req.body.dob,
+    gender: req.body.gender,
+    address: req.body.address,
+    profession: req.body.profession,
+    age: findage(req.body.dob)
+
+  }, function (err, response) {
+    if (err) return handleError(err);
+    else {
+      console.log('inserted');
+    }
+  });
+  res.send('saved');
+
+});
+app.post('/', (req, res) => {
   user.create({
     userId: getuuid(),
     name: req.body.name,
