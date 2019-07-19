@@ -1,11 +1,24 @@
 var mongoose = require('mongoose');
 const uuid=require('uuid/v4');
+var DateDiff = require('date-diff');
 mongoose.connect('mongodb://127.0.0.1:27017/userdb', { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     console.log("connected");
 });
+
+function findage(dob) {
+    let current
+    let date1 = new Date();
+    var date2 = new Date(dob);
+    let diff = new DateDiff(date1, date2);
+    console.log(date1);
+    console.log(date2);
+    let result = diff.years();
+    return Math.floor(result);
+  }
+
 var Schema = new mongoose.Schema(
     {
         userId: { type: String, required: true },
@@ -16,82 +29,70 @@ var Schema = new mongoose.Schema(
         profession: { type: String },
         age: { type: Number }
     })
+
 var user = db.model('userdata', Schema);
 
 
-exports.createUser = () => {
-    user.create({
+exports.createUser = (body) => {
+    console.log("here")
+    return user.create({
         userId: uuid(),
-        name: req.body.name,
-        dob: req.body.dob,
-        gender: req.body.gender,
-        address: req.body.address,
-        profession: req.body.profession,
-        age: findage(req.body.dob)
-    }, function (err, response) {
-        return response;
+        name: body.name,
+        dob: body.dob,
+        gender: body.gender,
+        address: body.address,
+        profession: body.profession,
+        age: findage(body.dob)
     });
 }
 
-exports.findUser = () => {
-    user.find({
-        userId: req.params.id
-    }, function (err, response) {
-        return response;
+exports.findUser = (params) => {
+    console.log("here")
+    return user.find({
+        userId: params
+    })
+}
+
+exports.filterByAge = (params) => {
+    return user.find({ age: { $gte: params } }, function (err, response) {
+         
     });
 }
-exports.filterByAge = () => {
-    user.find({ age: { $gte: req.params.age } }, function (err, response) {
-        return response;
-    });
+exports.filterByName = (params) => {
+    return user.find({
+        name:params
+    })
+};
+exports.filterByProf = (params) => {
+    return user.find({
+        profession: params
+    })
 }
-exports.filterByName = () => {
-    user.find({
-        name: req.params.name
-    }, function (err, response) {
-        return response;
-    });
+exports.filterByCity = (params) => {
+    return user.find({
+        address: { $regex: params, $options: 'i' }
+    })
 };
-exports.filterByProf = () => {
-    user.find({
-        profession: req.params.profession
-    }, function (err, response) {
-        return response;
-    });
-};
-exports.filterByCity = () => {
-    user.find({
-        address: { $regex: req.params.address, $options: 'i' }
-    }, function (err, response) {
-        return response;
-    });
-};
-exports.filterByGender = () => {
-    user.find({
-        gender: req.params.gender
-    }, function (err, response) {
-        return response;
-    });
+exports.filterByGender = (params) => {
+    return user.find({
+        gender: params
+    })
 }
-exports.updateById = () => {
+exports.updateById = (body) => {
     var obj = {
-        userId: req.params.id,
-        name: req.body.name,
-        dob: req.body.dob,
-        gender: req.body.gender,
-        address: req.body.address,
-        profession: req.body.profession,
+        userId: body.id,
+        name: body.name,
+        dob: body.dob,
+        gender:body.gender,
+        address: body.address,
+        profession:body.profession,
 
     }
-    user.findOneAndUpdate({ userId: req.params.id }, obj)
-        .then((user) => {
+    return user.findOneAndUpdate({ userId:  body.id}, obj)
+}
 
-            return user;
-        });
-};
-
-exports.search = () => {
-    let searchQuery = req.query;
+exports.search = (body) => {
+    let searchQuery = body;
     let obj = {};
     if (searchQuery.hasOwnProperty('name'))
         obj = { ...obj, name: { $regex: searchQuery.name } }
@@ -103,13 +104,11 @@ exports.search = () => {
         obj = { ...obj, gender: { $regex: searchQuery.gender } }
     console.log(obj)
 
-    user.find(obj, function (err, response) {
-        return response;
-    });
+    return user.find(obj)
+        
+   
 };
-exports.deleteById = (req, res) => {
-    user.deleteOne({ userId: req.params.id },
-        function (err, response) {
-            return response;
-        });
-};
+exports.deleteById = (params) => {
+    return user.deleteOne({ userId: params })
+}
+
