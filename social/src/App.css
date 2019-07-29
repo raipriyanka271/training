@@ -1,0 +1,73 @@
+
+
+.mainform {
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 20px 40px;  
+    background-color:#c0b2e7;
+    color:white;
+ 
+    
+} table {
+  padding: 60px;
+  border-spacing: 5;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 50%;
+  margin: 0 auto;
+  
+  margin-top: 100px;
+    max-width: 700px;
+    color:black;
+   
+}
+table td, table th {
+  padding-left: 8px;
+  text-align: center;
+}
+th {
+  height: 60px;
+  background: #c4b4f0;
+  color:white
+}
+table td tr {
+  
+  height: 50px;
+  text-align: center;
+}
+.comp{
+  background-color:rgb(106, 152, 238);
+}
+.incomp{
+
+  background:#C1F578   ;
+}
+.button1 {
+  background-color: #C1F578  ;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.button {
+ 
+  text-align: center;
+  
+  /* font-size: 10px;
+  margin: 4px 2px; */
+  cursor: pointer;
+  border-radius: 2px;
+  /* background-color:rgb(176, 243, 113); */
+  color:black;
+  background: transparent;
+  
+  border-color:rgb(211, 230, 193);
+}
