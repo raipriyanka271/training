@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+
 import './App.css';
 import { Redirect } from 'react-router-dom'
 
 import {
+  Icon,
   Form,
   Input,
   Tooltip,
@@ -21,7 +23,8 @@ class Signup extends React.Component {
     autoCompleteResult: [],
     newSignup: null,
     isRedirect: false,
-    email: null
+    email: null,
+    details: null
   };
   renderRedirect = () => {
     if (this.state.isRedirect) {
@@ -34,7 +37,8 @@ class Signup extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         values.dob = moment(values.dob).format('YYYY-MM-DD')
-        fetch('http://localhost:3001/api/newuser', {
+        fetch('http://localhost:3001/api/newuser'
+        , {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -53,10 +57,11 @@ class Signup extends React.Component {
             } else {
               this.setState({
                 isRedirect: true,
-                email: values.email
-            })
-          }
-        })
+                email: values.email,
+                details: values
+              })
+            }
+          })
       }
     })
   };
@@ -72,7 +77,8 @@ class Signup extends React.Component {
       callback('Two passwords that you enter is inconsistent!');
     } else {
       callback();
-    }
+    };
+
   };
 
   validateToNextPassword = (rule, value, callback) => {
@@ -81,6 +87,16 @@ class Signup extends React.Component {
       form.validateFields(['confirm'], { force: true });
     }
     callback();
+  };
+
+  checkCustomPassword= (rule, value, callback) => {
+    const { form } = this.props;
+    var regex = new RegExp("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])");
+    if (!regex.test(value)) {
+      callback(true);
+    } else {
+      callback();
+    };
   };
 
   render() {
@@ -110,91 +126,120 @@ class Signup extends React.Component {
         },
       },
     };
-    const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '91',
-    })(
-      <Select style={{ width: 70 }}>
-        <Option value="91">+91</Option>
-        <Option value="87">+87</Option>
-      </Select>,
-    );
     return (
+      <div className="maindiv">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <Icon type="arrow-left" />
+          </button>
+          <div class="dropdown-content">
+            <a href="/login">Login</a>
+            {/* <a href="/signup">signup</a> */}
+            <a href="/">Homepage</a>
+          </div>
+        </div>
+        <div className="signup">
+        <h3 className="heading2">Create New Account</h3>
+          <Form {...formItemLayout} onSubmit={this.handleSubmit} className="signupform">
+           
+            <Form.Item label="E-mail">
+              {getFieldDecorator('email', {
+                rules: [
+                  {
+                    type: 'email',
+                    message: 'The input is not valid E-mail!',
+                  },
+                  {
+                    required: true,
+                    message: 'Please input your E-mail!',
+                  },
+                ],
+              })(<Input />)}
+            </Form.Item>
 
-      <div className="signup">
-        <Form {...formItemLayout} onSubmit={this.handleSubmit} className="signupform">
-          <Form.Item label="E-mail">
-            {getFieldDecorator('email', {
-              rules: [
-                {
-                  type: 'email',
-                  message: 'The input is not valid E-mail!',
-                },
-                {
-                  required: true,
-                  message: 'Please input your E-mail!',
-                },
-              ],
-            })(<Input />)}
-          </Form.Item>
-          {(this.state.checkEmail) ?
-            <p className="alert">Email already Exists</p> : null
-          }
-          <Form.Item label="Password" hasFeedback>
-            {getFieldDecorator('password', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-                {
-                  validator: this.validateToNextPassword,
-                },
-              ],
-            })(<Input.Password />)}
-          </Form.Item>
-          <Form.Item label="Confirm Password" hasFeedback>
-            {getFieldDecorator('confirm', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please confirm your password!',
-                },
-                {
-                  validator: this.compareToFirstPassword,
-                },
-              ],
-            })(<Input.Password onBlur={this.handleConfirmBlur} />)}
-          </Form.Item>
-          <Form.Item
-            label={
-              <span>
-                Name
+            <Form.Item
+              label={
+                <span>
+                  First Name
               <Tooltip title="What do you want others to call you?">
-                </Tooltip>
-              </span>
+                  </Tooltip>
+                </span>
+              }
+            >
+              {getFieldDecorator('first_name', {
+                rules: [{ required: true, message: 'Please input your name!', whitespace: true }],
+              })(<Input />)}
+            </Form.Item>
+            <Form.Item
+              label={
+                <span>
+                  Last Name
+              <Tooltip title="What do you want others to call you?">
+                  </Tooltip>
+                </span>
+              }
+            >
+              {getFieldDecorator('last_name', {
+                rules: [{ required: true, message: 'Please input your name!', whitespace: true }],
+              })(<Input />)}
+            </Form.Item>
+            <Form.Item label="Password" hasFeedback>
+              {getFieldDecorator('password', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your password!',
+                  },
+                  {
+                    validator: this.validateToNextPassword,
+                  },
+                  {
+                    validator: this.checkCustomPassword,
+                    message: 'Passwords must contain a uppercase , a lower case and Special character!',
+                  },
+                  {
+                    min: 8,
+                    message: 'Password must be 8 characters long!!',
+                  }
+                ],
+              })(<Input.Password />)}
+            </Form.Item>
+            <Form.Item label="Confirm Password" hasFeedback>
+              {getFieldDecorator('confirm', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please confirm your password!',
+                  },
+                  {
+                    validator: this.compareToFirstPassword,
+                  },
+                  {
+                    min: 8,
+                    message: 'Password too small!!',
+                  }
+
+
+                ],
+              })(<Input.Password onBlur={this.handleConfirmBlur} />)}
+            </Form.Item>
+
+
+            <Form.Item label="Birthday">
+              {getFieldDecorator('dob', {
+              })(<DatePicker style={{ width: '100%' }} format="YYYY-MM-DD" />)}
+            </Form.Item>
+            {(this.state.checkEmail) ?
+              <p className="alert1">Email already Exists</p> : null
             }
-          >
-            {getFieldDecorator('name', {
-              rules: [{ required: true, message: 'Please input your name!', whitespace: true }],
-            })(<Input />)}
-          </Form.Item>
-
-          <Form.Item label="Birthday">
-            {getFieldDecorator('dob', {
-            })(<DatePicker style={{ width: '100%' }} format="YYYY-MM-DD" />)}
-          </Form.Item>
-
-          <Form.Item label="Phone Number">
-            {getFieldDecorator('phone', {
-              rules: [{ required: true, message: 'Please input your phone number!' }],
-            })(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
-          </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
-              Register
+            <Form.Item {...tailFormItemLayout}>
+              <Button type="primary" htmlType="submit">
+                Register
           </Button>
-          </Form.Item>
-        </Form>
+              Already a User? <a href="/login">Login now!</a>
+            </Form.Item>
+          </Form>
+        </div>
       </div>
     );
   }

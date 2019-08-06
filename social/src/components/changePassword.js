@@ -4,6 +4,7 @@ import './App.css';
 import { Redirect } from 'react-router-dom'
 
 import {
+  Icon,
   Form,
   Input,
   Tooltip,
@@ -86,9 +87,20 @@ class Changepassword extends React.Component {
     };
 
     return (
-
+      <div className="maindiv">
+         <div class="dropdown">
+        <button class="dropbtn">
+        <Icon type="arrow-left" />
+      </button>
+      <div class="dropdown-content">
+          <a href="/login">Login</a>
+          <a href="/signup">Signup</a>
+          <a href="/">Homepage</a>
+      </div>
+      </div>
       <div className="changeDiv">
         <Form {...formItemLayout} onSubmit={this.handleSubmit} className="signupform">
+        <h3 className="heading">Reset Password</h3>
           <Form.Item label="Password" hasFeedback>
             {getFieldDecorator('password', {
               rules: [
@@ -99,6 +111,10 @@ class Changepassword extends React.Component {
                 {
                   validator: this.validateToNextPassword,
                 },
+                {
+                  min: 8,
+                  message: 'Password too small!',
+                }
               ],
             })(<Input.Password />)}
           </Form.Item>
@@ -112,6 +128,10 @@ class Changepassword extends React.Component {
                 {
                   validator: this.compareToFirstPassword,
                 },
+                {
+                  min: 8,
+                  message: 'Password too small!',
+                }
               ],
             })(<Input.Password onBlur={this.handleConfirmBlur} />)}
           </Form.Item>
@@ -120,6 +140,7 @@ class Changepassword extends React.Component {
           </Button>
 
         </Form>
+      </div>
       </div>
     );
   }

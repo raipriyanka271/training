@@ -1,0 +1,166 @@
+
+
+.image{
+    margin-top:10px;
+    background-image: url('\assests\user.png');
+    height:180px;
+    border-radius: 50%;
+}
+.sider{
+    height:1000px;
+    background-color:black;
+    margin: auto;
+    width:500px;
+    opacity: 0.9;  
+
+}
+.nav-text{
+    color:rgb(108, 144, 243)
+}
+
+.sider1{
+    background-color:rgb(2, 2, 2);
+    opacity: 0.8; 
+    color:white;
+}
+.nav-text:hover{
+    color:white
+}
+Menu.item.hover{
+    color:rgb(9, 80, 68)
+}
+
+
+#components-layout-demo-responsive .logo {
+    height: 32px;
+    background: rgb(216, 19, 19);
+    margin: 16px;
+  }
+
+  .logo{
+      color:red
+  }
+
+  .header{
+      background-image: url('\assests\home.jpg');
+      background-size: cover;
+      height: 400px;
+  }
+
+  .search{
+    position: relative;
+    margin: auto;
+    top: 150px;
+    bottom: 0;
+    left: 30vw;
+    width: 50vw;
+    height:6vh
+  } 
+
+
+  .name{
+    position: relative;
+    margin: auto;
+    top: 20px;
+    right: 0px;
+    bottom: 0;
+    left:60px;
+    color:white;
+  }
+
+  
+  .content{
+    height:1000px;
+    background-color: rgb(245, 245, 245);
+
+
+  }
+  .form{
+      margin-left:500px
+  }
+
+  .post{
+      height:200px
+  }
+
+  .container{
+    display: flex;
+    flex-wrap:wrap ;
+    flex-direction:  column;
+    justify-content: space-around; 
+    left: 30vw;
+    margin-top:2vw;
+  }
+.containerInside{
+    color:rgb(255, 255, 255);
+    margin-left:4vw;
+    top:4vh;
+    font-size:20px
+
+
+}
+  .itemflex{
+    background-color:rgb(5, 5, 5);
+    height:40vh;
+    width:50vw;
+    margin-left:30vw;
+    margin-top:1vw; 
+    justify-content: space-between; 
+    opacity: 0.8
+  }
+
+  .iconheart{
+      margin-top:3vh;
+      color:red;
+  }
+  
+
+  .heading {
+    position: relative;
+    font-style:oblique;
+    margin-top:20px;
+    margin-left:40vw;
+    font-size:2vw;
+	letter-spacing: 1px;
+	color: rgba(85, 85, 85, 0.952); 
+}
+
+.heading1{
+	
+    position: relative;
+    font-style:oblique;
+    margin-top:20px;
+    margin-left:50vw;
+    font-size:2vw;
+	letter-spacing: 1px;
+	color: rgba(85, 85, 85, 0.952); 
+}
+
+
+.fname, select {
+    width: 50%;
+    height:100px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    margin-left:30vw;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width: 50%;
+    background-color: rgb(68, 68, 68);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    margin-left:30vw;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #39677c;
+  }

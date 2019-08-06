@@ -10,13 +10,16 @@ class Login extends Component {
     this.state = {
       users: null,
       isRedirect: false,
-      usersValidation: false
+      usersValidation: false,
+      emailValidate: false,
+      statusValidate: false,
+      token: null
     }
   }
 
   renderRedirect = () => {
     if (this.state.isRedirect) {
-      return <Redirect to='/signup' />
+      return <Redirect to='/homepage' />
 
     }
   }
@@ -29,12 +32,25 @@ class Login extends Component {
           .then(response => response.text())
           .then(data => {
             if (data === "no-user") {
-
-              this.setState({ usersValidation: true })
+              this.setState({
+                usersValidation: true,
+                emailValidate: false,
+                statusValidate: false,
+              })
+            }
+            else if (data === "not-allowd") {
+              this.setState({
+                emailValidate: true,
+                usersValidation: false,
+                statusValidate: false,
+              })
+            }
+            else if (data === "status-false") {
+              this.setState({ statusValidate: true, email: values.username })
             }
             else {
-
-              this.setState({ isRedirect: true })
+              
+              this.setState({ email: values.username, token: data, isRedirect: true })
             }
           });
       };
@@ -42,52 +58,77 @@ class Login extends Component {
   };
 
   render() {
+
+    if(this.state.token!=null){
+    sessionStorage.setItem('token', this.state.token);
+    }
+    let data = sessionStorage.getItem('token');
+    if(data!==null){
+     return <Redirect to='/homepage' />
+    }
+    
+    if (this.state.statusValidate) {
+      return <Redirect to={{ pathname: '/verification', state: { email: this.state.email } }} />
+    }
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className="maindiv">
-        <div>
-          {this.renderRedirect()}
-        </div>
-        <div className="logincontainer">
-          <Form onSubmit={this.handleSubmit} className="login-form">
-            <Form.Item>
-              {getFieldDecorator('username', {
-                rules: [{ required: true, message: 'Please input your username!' }],
-              })(
-                <Input
-                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="Username"
-                />,
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('password', {
-                rules: [{ required: true, message: 'Please input your Password!' }],
-              })(
-                <Input
-                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  type="password"
-                  placeholder="Password"
-                />,
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true,
-              })(<Checkbox>Remember me</Checkbox>)}
-              <a className="login-form-forgot" href="/passwordVerify">
-                Forgot password
-              </a>
-              {(this.state.usersValidation) ?
-                <p className="alert">Username and Password Does Not Match</p> : null
+      <div>
+        <div className="maindiv">
+          <div class="dropdown">
+            <button class="dropbtn">
+              <Icon type="arrow-left" />
+            </button>
+            <div class="dropdown-content">
+              <a href="/signup">signup</a>
+              <a href="/">Homepage</a>
+            </div>
+          </div>
+          <div>
+            {this.renderRedirect()}
+          </div>
+          <div className="logincontainer">
+          <h3 className="heading2">Login Here</h3>
+            <Form onSubmit={this.handleSubmit} className="login-form">
+              
+              <Form.Item>
+                {getFieldDecorator('username', {
+                  rules: [{ required: true, message: 'Please input your username!' }],
+                })(
+                  <Input
+                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    placeholder="Username"
+                  />,
+                )}
+              </Form.Item>
+              {(this.state.emailValidate) ?
+                <p className="alert">Email not registered!!</p> : null
               }
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                Log in
+              <Form.Item>
+                {getFieldDecorator('password', {
+                  rules: [{ required: true, message: 'Please input your Password!' }],
+                })(
+                  <Input
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    type="password"
+                    placeholder="Password"
+                  />,
+                )}
+              </Form.Item>
+              <Form.Item>
+                <a
+                  href="/passwordVerify">
+                  Forgot password
+              </a>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                  Log in
               </Button>
-              New User? <a href="/signup">register now!</a>
-            </Form.Item>
-          </Form>
+                {(this.state.usersValidation) ?
+                  <p className="alert">Username and Password Does Not Match</p> : null
+                }
+                New User? <a href="/signup">register now!</a>
+              </Form.Item>
+            </Form>
+          </div>
         </div>
       </div>
     );

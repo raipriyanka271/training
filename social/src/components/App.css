@@ -8,16 +8,76 @@
   bottom: 0;
   left: 0;
   width: 400px;
-  height: 400px;
-  border: 2px solid rgb(113, 159, 245);
+  height: 500px;
+  /* border: 2px solid rgb(113, 159, 245); */
   border-radius: 10px;
+  background-color: rgb(226, 236, 251);
+   opacity: 0.7; 
 }
 
-.maindiv{
-  background-image:url("pic.jpg");
+.landingContainer{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgb(151, 194, 250); */
+  background-image: url("\assests\pic1.jpg");
   background-size: cover;
-  min-width: 100%;
-  min-height: 100%;
+ 
+}
+
+.landingInside{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 700px;
+  height:100%;
+  border-radius: 10px;
+  background-color: rgb(160, 212, 246);
+  color:white;
+  opacity: 0.7;
+
+
+}
+.title{
+  border-radius: 10px;
+  font-size:5vw;
+  color:white
+}
+
+.mainDiv{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+  font-size:2vw;
+  color:rgb(255, 255, 255);
+  align-content: center;
+}
+.maindiv{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("\assests\pic1.jpg");
+  background-size: cover;
+  
 }
 .signup{
   position: absolute;
@@ -28,8 +88,9 @@
   left: 0;
   width: 600px;
   height: 600px;
-  border: 1px solid rgb(104, 136, 197);
   border-radius: 10px;
+  background-color: rgb(226, 236, 251);
+  opacity: 0.7;
 }
 
 .changeDiv{
@@ -40,9 +101,24 @@
   bottom: 0;
   left: 0;
   width: 500px;
-  height: 300px;
-  border: 2px solid rgb(113, 159, 245); 
+  height: 350px;
+  background-color: rgb(226, 236, 251);
   border-radius: 10px;
+  opacity: 0.7;
+}
+
+.otpDiv{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width:400px;
+  height: 450px;
+  background-color: rgb(226, 236, 251);
+  border-radius: 10px;
+  opacity: 0.7;
 }
 
 .otpdiv{
@@ -54,13 +130,14 @@
   left: 0;
   width: 400px;
   height: 400px;
-  border: 2px solid rgb(113, 159, 245);
+  background-color: rgb(226, 236, 251);
   border-radius: 10px;
+  opacity: 0.7;
 }
 .otp-form{
   position: relative; 
   margin: auto;
-  top: 100px;
+  top: 30px;
   right: 0;
   bottom: 0;
   left: 0; 
@@ -69,20 +146,30 @@
 .alert{
   color:red;
 }
+
+.alert1{
+  color:red;
+  margin-left: 100px;
+}
 .signupform{
   position: relative; 
   margin: auto;
-  top: 60px;
+  /* top: 60px; */
   right: 0;
   bottom: 0;
   left: 0; 
  width: 400px;
 }
 
+.heading{
+  font-size: 30px;
+  margin-left:60px;
+}
+
 .login-form {
   position: relative;
   margin: auto;
-  top: 80px;
+  /* top: 40px; */
   right: 0;
   bottom: 0;
   left: 0; 
@@ -100,3 +187,84 @@
   margin-left:180px;
 
 }
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {float: none;}
+  .topnav.responsive .dropdown-content {position: relative;}
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 30px;    
+  border: none;
+  outline: none;
+  color: rgb(255, 254, 254);
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin-left: 50px;
+}
+
+.dropdown-content {
+  margin-left: 50px;
+  display: none;
+  position: absolute;
+  /* background-color: #c0f3fb; */
+  background-color: rgb(226, 236, 251);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.dropdown-content a {
+  float: none;
+  color: rgb(2, 2, 2);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown-content a:hover {
+  background-color: rgb(42, 42, 42);
+  color: rgb(255, 255, 255);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.heading2{
+margin-top:40px;
+font-size: 50px;
+margin-left:80px;
+
+}
+
+.heading3{
+  margin-top:40px;
+  font-size: 40px;
+  margin-left:60px;
+  
+  }
