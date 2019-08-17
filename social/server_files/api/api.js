@@ -1,7 +1,10 @@
 const services = require('../services/services');
 var nodemailer = require('nodemailer');
+
 const bcrypt = require('bcrypt');
 var salt = 10;
+
+
 var passport = require('passport')
 var cfg = require("../config.js");
 var jwt = require("jwt-simple");
@@ -33,23 +36,27 @@ passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
 
 exports.home = (req, res) => {
     services.getPost().then((posts) =>{
-        console.log(posts.rows)
         res.send(posts.rows)
     })
 }
 
 exports.addPost = (req, res) => {
-    // console.log("here============>",req.params.content);
-    services.addPost(req.user.userid,req.params.content).then((posts) =>{
-        console.log(posts.rows)
+    services.addPost(req.user.name,req.user.userid,req.params.content).then((posts) =>{
         res.send(posts.rows[0])
     })
 }
 
+exports.hitLike = (req,res) => {
+    services.hitLike(req.params.post_id,req.params.likes).then((liked)=>{
+        res.send(liked)
+    })
+}
 exports.login = (req, res) => {
     services.checkEmail(req.params.name).then((emailChecked) => {
         if (emailChecked.rowCount !== 0) {
             let password = emailChecked.rows[0].password;
+
+            
             bcrypt.compare(req.params.password, password, function (err, result) {
                 if (result == true) {
                     services.login(req.params.name, password).then((userFound) => {
@@ -90,9 +97,12 @@ exports.signup = (req, res) => {
     let otp = Math.floor((Math.random() * 9000) + 1000)
     services.checkEmail(req.body.values.email).then((emailChecked) => {
         if (emailChecked.rowCount == 0) {
+
             bcrypt.hash(req.body.values.password, salt, (err, encrypted) => {
                 req.body.values.password = encrypted
                 services.signup(req.body, otp).then((userCreated) => {
+
+
                     const mailOptions = {
                         from: 'imraipriyanka@gmail.com',
                         to: req.body.values.email,

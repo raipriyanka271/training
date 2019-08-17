@@ -10,4 +10,5 @@ module.exports= app =>{
   app.get('/api/changePassword/:email/:password', API.passwordChange);
   app.get('/api/home', passport.authenticate('jwt',{session:false}),API.home);
   app.get('/api/addpost/:content', passport.authenticate('jwt',{session:false}),API.addPost);
+  app.get('/api/hitLike/:post_id/:likes',API.hitLike);
 }

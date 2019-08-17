@@ -49,7 +49,7 @@ class Login extends Component {
               this.setState({ statusValidate: true, email: values.username })
             }
             else {
-              
+
               this.setState({ email: values.username, token: data, isRedirect: true })
             }
           });
@@ -59,14 +59,14 @@ class Login extends Component {
 
   render() {
 
-    if(this.state.token!=null){
-    sessionStorage.setItem('token', this.state.token);
+    if (this.state.token != null) {
+      sessionStorage.setItem('token', this.state.token);
     }
     let data = sessionStorage.getItem('token');
-    if(data!==null){
-     return <Redirect to='/homepage' />
+    if (data !== null) {
+      return <Redirect to='/homepage' />
     }
-    
+
     if (this.state.statusValidate) {
       return <Redirect to={{ pathname: '/verification', state: { email: this.state.email } }} />
     }
@@ -87,9 +87,9 @@ class Login extends Component {
             {this.renderRedirect()}
           </div>
           <div className="logincontainer">
-          <h3 className="heading2">Login Here</h3>
+            <h3 className="heading2">Niranjan swami</h3>
             <Form onSubmit={this.handleSubmit} className="login-form">
-              
+
               <Form.Item>
                 {getFieldDecorator('username', {
                   rules: [{ required: true, message: 'Please input your username!' }],

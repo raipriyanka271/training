@@ -55,6 +55,12 @@ exports.revertStatus = (email) => {
     return client.query('UPDATE public.user SET otp = '+ null +' ,status = '  + true + ' WHERE email=' + '\'' + email + '\'')
 }
 
+exports.hitLike = (id,likes) => {
+    let like=(parseInt(likes)+1)
+    return client.query('UPDATE public.post SET likes = '+ like + ' WHERE post_id = ' +  id + '')
+}
+
+
 exports.getId = (id) => {
     return client.query('Select * from  public."user" where userid='  + parseInt(id) )
 }
@@ -64,9 +70,7 @@ exports.getPost =() =>{
 
 }
 
-exports.addPost = (id,content) =>{
-    console.log(content)
-    console.log(id)
-    return client.query('INSERT INTO public.post (user_id,content) VALUES ('+ parseInt(id)  + ', \'' + content + '\')')
+exports.addPost = (name,id,content) =>{
+    return client.query('INSERT INTO public.post (name,user_id,content) VALUES ('+ '\'' + name + '\','+ parseInt(id)  + ', \'' + content + '\')')
 
 }

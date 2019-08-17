@@ -16,7 +16,8 @@ class Homepage extends Component {
             collapsed: false,
             posts: null,
             updated: false,
-            like:false
+            showPosts:false,
+            showFriends:false,
         }
     }
     toggle = () => {
@@ -48,7 +49,8 @@ class Homepage extends Component {
                 response.json().then((result) => {
                     if (prevState.posts === this.state.posts) {
                         this.setState({
-                            posts: result
+                            posts: result,
+
                         })
                     }
                 })
@@ -108,9 +110,10 @@ class Homepage extends Component {
                     this.setState({ isRedirect: true })
                 }
                 else {
-                    document.getElementById('form1').reset();
+                  document.getElementById('form1').reset();
                     this.setState({
-                        updated: true
+                        updated: true,
+
                     })
 
                 }
@@ -119,14 +122,27 @@ class Homepage extends Component {
 
     }
 
-    handleLike = () => {
-        this.setState({
-            like: !this.state.like,
-        });
-    };
+   
 
+    menuClicked = (key) =>{
+        if(key.key==="4"){
+            this.setState({
+                showPosts:true
+            })
+        }else if(key.key==='3'){
+            this.setState({
+                showFriends:true,
+                showPosts:false
+            })
+        }
+         else{
+            this.setState({
+                showPosts:false,
+                showFriends:false
+            })
+        }
+    }
     render() {
-        console.log(this.state.posts)
         const { getFieldDecorator } = this.props.form;
         if (this.state.isRedirect) {
             return <Redirect to={{ pathname: '/login' }} />
@@ -134,7 +150,7 @@ class Homepage extends Component {
         const postlist = (this.state.posts!==null) ?
       this.state.posts.reverse().map((singlePost, index) => {
         return (
-          <div key={singlePost.id}>
+          <div key={index}>
             <Singlepost post={singlePost} />
           </div>
         )
@@ -162,20 +178,17 @@ class Homepage extends Component {
                             <div className="image"></div>
                             <p className="name">HI Priyanka !!</p>
                             <Button onClick={this.destroySession} style={{ color: 'white', background: 'black', border: 'black', opacity: 0.8, margin: 50 }}>Logout</Button>
-                            <Menu className="sider1" mode="inline" defaultSelectedKeys={['4']}>
-                                <Menu.Item key="1">
+                            <Menu className="sider1" mode="inline" >
+                                <Menu.Item key="1" onClick={(key)=>{ this.menuClicked(key)}}>
                                     <Icon type="user" />
                                     <span className="nav-text">View Profile</span>
                                 </Menu.Item>
-                                <Menu.Item key="2">
-                                    <Icon type="user" />
-                                    <span className="nav-text">Edit Profile</span>
-                                </Menu.Item>
-                                <Menu.Item key="3">
+            
+                                <Menu.Item key="3" onClick={(key)=>{ this.menuClicked(key)}}>
                                     <Icon type="user" />
                                     <span className="nav-text">Friends</span>
                                 </Menu.Item>
-                                <Menu.Item key="4">
+                                <Menu.Item key="4" onClick={(key)=>{ this.menuClicked(key)}}>
                                     <Icon type="user" />
                                     <span className="nav-text">Posts</span>
                                 </Menu.Item>
@@ -188,8 +201,12 @@ class Homepage extends Component {
                                     onSearch={(value) => this.search(value)}
 
                                 />
+                               
                             </div>
+                           
                             <div className="content">
+                            {this.state.showPosts=== true ?
+                           <div>
                                 <div className="heading">Share a word with your friends..</div>
                                 <br></br>
                                 <div>
@@ -203,7 +220,14 @@ class Homepage extends Component {
                                     <h3 className="heading1">Recents Posts</h3>
                                     {postlist}
                                 </div>
+                                </div>                          
+                            :
+                            <div><p className="heading">PROFILE HERE</p></div>}
+                              {this.state.showFriends=== true ?
+                              <div><p className="heading">Friend List</p></div>
+                              :<div><p className="heading"></p></div>}
                             </div>
+
                         </Layout>
                     </Layout>,
                 </div>,
