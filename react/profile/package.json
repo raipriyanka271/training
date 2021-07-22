@@ -9,7 +9,7 @@
     "react-dom": "^16.8.6",
     "react-json-excel": "^1.0.0",
     "react-scripts": "3.0.1",
-    "xlsx": "^0.14.3"
+    "xlsx": "^0.17.0"
   },
   "scripts": {
     "start": "react-scripts start",
